@@ -10,19 +10,15 @@ import {
   Input
 } from "reactstrap";
 import { connect } from "react-redux";
-import { addItem } from "../actions/itemActions";
-import PropTypes from "prop-types";
+import { updateItem } from "../actions/itemActions";
 
-class DeliverModal extends Component {
+// UpdateModal don't work
+class UpdateModal extends Component {
   state = {
     modal: false,
     name: "",
     domestic: 0,
     international: 0
-  };
-
-  static propTypes = {
-    isAuthenticated: PropTypes.bool
   };
 
   toggle = () => {
@@ -48,9 +44,9 @@ class DeliverModal extends Component {
     };
 
     //Add item via addItem action
-    this.props.addItem(newItem);
+    this.props.updateItem(newItem);
 
-    //Bugfix with domestic/international prop
+    //Bugfix with domestic prop
     this.setState({
       domestic: 0,
       international: 0
@@ -61,24 +57,12 @@ class DeliverModal extends Component {
   };
   
   render() {
+    console.log('domestic', this.state.domestic)
+    console.log('international', this.state.international)
     return (
       <div>
-        {this.props.isAuthenticated ? (
-          <Button
-            color="dark"
-            style={{ marginBottom: "2rem" }}
-            onClick={this.toggle}
-          >
-            Добавить посылку
-          </Button>
-        ) : (
-          <h4 className="mb-3 ml-4">
-            Пожалуйста, авторизируйтесь для работы с приложением
-          </h4>
-        )}
-
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Добавление посылки</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Изменение посылки</ModalHeader>
           <ModalBody>
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
@@ -105,7 +89,7 @@ class DeliverModal extends Component {
                   onChange={this.onChange}
                 />
                 <Button color="dark" style={{ marginTop: "2rem" }} block>
-                  Добавить
+                  Изменить
                 </Button>
               </FormGroup>
             </Form>
@@ -118,7 +102,6 @@ class DeliverModal extends Component {
 
 const mapStateToProps = state => ({
   item: state.item,
-  isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, { addItem })(DeliverModal);
+export default connect(mapStateToProps, { updateItem })(UpdateModal);

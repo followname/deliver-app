@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import AppNavbar from "./components/AppNavbar";
 import DeliverModal from "./components/DeliverModal";
-import DeliverList from './components/DeliverList'
+import DeliverList from "./components/DeliverList";
 
 import { Provider } from "react-redux";
 import store from "./store";

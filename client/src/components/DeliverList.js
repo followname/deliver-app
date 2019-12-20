@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Container, ListGroup, ListGroupItem, Button } from "reactstrap";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { connect } from "react-redux";
-import { getItems, deleteItem } from "../actions/itemActions";
+import { getItems, deleteItem, updateItem } from "../actions/itemActions";
 import PropTypes from "prop-types";
 
 class DeliverList extends Component {
@@ -20,6 +20,11 @@ class DeliverList extends Component {
     this.props.deleteItem(id);
   };
 
+  // onUpdateClick don't work
+  onUpdateClick = (id) => {
+    this.props.updateItem(id)
+  }
+
   render() {
     const { items } = this.props.item;
     return (
@@ -30,15 +35,27 @@ class DeliverList extends Component {
               <CSSTransition key={_id} timeout={500} classNames="fade">
                 <ListGroupItem>
                   {this.props.isAuthenticated ? (
-                    <Button
-                      className="remove-btn"
-                      color="danger"
-                      size="sm"
-                      onClick={this.onDeleteClick.bind(this, _id)}
-                    >
-                      &times;
-                    </Button>
-                  ) : null }
+                    <Fragment>
+                      <Button
+                        className="remove-btn"
+                        color="danger"
+                        size="sm"
+                        onClick={this.onDeleteClick.bind(this, _id)}
+                      >
+                        X
+                      </Button>
+                      
+                      {/* update button don't work */}
+                      <Button
+                        className="update-btn float-sm-right"
+                        color="primary"
+                        size="sm"
+                        onClick={this.onUpdateClick.bind(this, _id)}
+                      >
+                        Изменить
+                      </Button>
+                    </Fragment>
+                  ) : null}
                   {name}, цена за доставку: {price} рублей
                 </ListGroupItem>
               </CSSTransition>
@@ -57,5 +74,6 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   getItems,
-  deleteItem
+  deleteItem,
+  updateItem
 })(DeliverList);

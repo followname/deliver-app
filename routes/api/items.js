@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const auth = require('../../middleware/auth')
+const auth = require("../../middleware/auth");
 
 //Item Model
 const Item = require("../../models/Item");
@@ -27,6 +27,24 @@ router.post("/", auth, (req, res) => {
   });
 
   newItem.save().then(item => res.json(item));
+});
+
+// @route PUT api/items
+// @desc update A Item
+// @access Private
+router.put("/:id", auth, (req, res) => {
+  const id = req.params.id;
+  const { name, domestic, international, price } = req.body;
+  req.newData = {
+    name,
+    domestic,
+    international,
+    price
+  };
+  Item.findOneAndUpdate({ _id: id }, req.newData)
+    .then(item =>item.save().then(() => res.json({ succes: true }))
+    )
+    .catch(err => res.status(404).json({ success: false }));
 });
 
 // @route DELETE api/items
