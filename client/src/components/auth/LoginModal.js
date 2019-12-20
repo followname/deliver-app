@@ -80,17 +80,17 @@ class LoginModal extends Component {
     return (
       <div>
         <NavLink onClick={this.toggle} href="#">
-          Login
+          Вход
         </NavLink>
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Login</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Вход</ModalHeader>
           <ModalBody>
             {this.state.msg ? (
               <Alert color="danger">{this.state.msg}</Alert>
             ) : null}
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Label for="email">Email</Label>
+                <Label for="email">Почтовый адрес</Label>
 
                 <Input
                   type="email"
@@ -100,7 +100,7 @@ class LoginModal extends Component {
                   className="mb-3"
                   onChange={this.onChange}
                 />
-                <Label for="password">Password</Label>
+                <Label for="password">Пароль</Label>
 
                 <Input
                   type="password"
@@ -111,7 +111,7 @@ class LoginModal extends Component {
                   onChange={this.onChange}
                 />
                 <Button color="dark" style={{ marginTop: "2rem" }} block>
-                  Login
+                  Войти
                 </Button>
               </FormGroup>
             </Form>

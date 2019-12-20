@@ -16,16 +16,16 @@ router.post("/", (req, res) => {
 
   // Simple validation
   if (!email || !password) {
-    return res.status(400).json({ msg: "Please enter all fields" });
+    return res.status(400).json({ msg: "Пожалуйста, заполните все поля" });
   }
 
   // Check for existing user
   User.findOne({ email }).then(user => {
-    if (!user) return res.status(400).json({ msg: "User Does not exists" });
+    if (!user) return res.status(400).json({ msg: "Пользователя с таким именем не существует" });
 
     // Validate password
     bcrypt.compare(password, user.password).then(isMatch => {
-      if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
+      if (!isMatch) return res.status(400).json({ msg: "Неверно введены учетные данные" });
 
       jwt.sign(
         { id: user.id },

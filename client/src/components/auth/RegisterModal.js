@@ -83,17 +83,17 @@ class RegisterModal extends Component {
     return (
       <div>
         <NavLink onClick={this.toggle} href="#">
-          Register
+          Регистрация
         </NavLink>
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Register</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Регистрация</ModalHeader>
           <ModalBody>
             {this.state.msg ? (
               <Alert color="danger">{this.state.msg}</Alert>
             ) : null}
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Label for="name">name</Label>
+                <Label for="name">Имя</Label>
                 <Input
                   type="text"
                   name="name"
@@ -102,7 +102,7 @@ class RegisterModal extends Component {
                   className="mb-3"
                   onChange={this.onChange}
                 />
-                <Label for="email">Email</Label>
+                <Label for="email">Почтовый адрес</Label>
 
                 <Input
                   type="email"
@@ -112,7 +112,7 @@ class RegisterModal extends Component {
                   className="mb-3"
                   onChange={this.onChange}
                 />
-                <Label for="password">Password</Label>
+                <Label for="password">Пароль</Label>
 
                 <Input
                   type="password"
@@ -123,7 +123,7 @@ class RegisterModal extends Component {
                   onChange={this.onChange}
                 />
                 <Button color="dark" style={{ marginTop: "2rem" }} block>
-                  Register
+                  Зарегистрироваться
                 </Button>
               </FormGroup>
             </Form>
